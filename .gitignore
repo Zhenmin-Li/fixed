@@ -1,3 +1,5 @@
 .local/*
 .rstudio/*
-.DS_Store/*
+.DS_Store
+derived_data/*.csv
+.active-rstudio-document
