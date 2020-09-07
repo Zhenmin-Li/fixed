@@ -6,4 +6,6 @@ ggplot(data = netflix) +
        x = "Type",
        y = "Frequency")
 
-ggsave("image1.png")
+aspect_ratio <- 2.5
+height <- 7
+ggsave("image1.png", height = 7 , width = 7 * aspect_ratio)
