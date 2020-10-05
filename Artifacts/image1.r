@@ -9,4 +9,4 @@ ggplot(data = netflix) +
 
 aspect_ratio <- 1.5
 height <- 7
-ggsave("image1.png", height = 7 , width = 7 * aspect_ratio)
+ggsave("Artifacts/image1.png", height = 7 , width = 7 * aspect_ratio)

@@ -12,4 +12,4 @@ g <- netflix %>%
 
 aspect_ratio <- 2
 height <- 7
-ggsave("image2.png", g, height = 7 , width = 7 * aspect_ratio)
+ggsave("Artifacts/image2.png", g, height = 7 , width = 7 * aspect_ratio)
