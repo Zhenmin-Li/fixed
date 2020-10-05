@@ -24,14 +24,19 @@ If time permits, we may do some clustering and machine learning.
 
 
 Datasets
+-------------------
 
 The datasets we will analyze are publicly available on Kaggle and can be downloaded here: https://www.kaggle.com/shivamb/netflix-shows
 
 
 
 Preliminary Figures
+----------------------
 
-
+!(“Artifacts/image1.png”)
+!(“Artifacts/image2.png”)
+!(“Artifacts/image3.png”)
+!(“Artifacts/image4.png”)
 
 
 Usage

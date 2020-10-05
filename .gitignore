@@ -3,3 +3,5 @@
 .DS_Store
 derived_data/*.csv
 .active-rstudio-document
+.viminfo
+.bash_history

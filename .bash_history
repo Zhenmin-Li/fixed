@@ -49,3 +49,6 @@ mv image2.png Artifacts/image2.png
 git add .
 git commit -m "This should be a better size for the images"
 git push
+git commit -m "added .bash_history to gitignore"
+git push
+git log
