@@ -12,4 +12,4 @@ g <- tv %>%
 
 aspect_ratio <- 2
 height <- 7
-ggsave("image4.png", g, height = 7 , width = 7 * aspect_ratio)
+ggsave("Artifacts/image4.png", g, height = 7 , width = 7 * aspect_ratio)

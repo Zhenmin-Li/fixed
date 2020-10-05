@@ -34,8 +34,11 @@ Preliminary Figures
 ----------------------
 
 ![Image 1](“Artifacts/image1.png”)
+
 ![Image 2](“Artifacts/image2.png”)
+
 ![Image 3](“Artifacts/image3.png”)
+
 ![Image 4](“Artifacts/image4.png”)
 
 
