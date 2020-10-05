@@ -33,10 +33,10 @@ The datasets we will analyze are publicly available on Kaggle and can be downloa
 Preliminary Figures
 ----------------------
 
-!(“Artifacts/image1.png”)
-!(“Artifacts/image2.png”)
-!(“Artifacts/image3.png”)
-!(“Artifacts/image4.png”)
+![Image 1](“Artifacts/image1.png”)
+![Image 2](“Artifacts/image2.png”)
+![Image 3](“Artifacts/image3.png”)
+![Image 4](“Artifacts/image4.png”)
 
 
 Usage
