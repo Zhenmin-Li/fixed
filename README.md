@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 Sam Hawke
 BIOS 611
 ----------------------------------------
@@ -29,6 +24,7 @@ If time permits, we may do some clustering and machine learning.
 
 
 Datasets
+--------------------
 
 The datasets we will analyze are publicly available on Kaggle and can be downloaded here: https://www.kaggle.com/shivamb/netflix-shows
 
@@ -37,7 +33,13 @@ The datasets we will analyze are publicly available on Kaggle and can be downloa
 Preliminary Figures
 --------------------
 
-![]("Artifacts/image1.png")
+![](Artifacts/image1.png)
+
+![](Artifacts/image2.png)
+
+![](Artifacts/image3.png)
+
+![](Artifacts/image4.png)
 
 
 Usage
