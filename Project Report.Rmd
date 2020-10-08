@@ -66,5 +66,12 @@ hist(tv$num_seasons, col = "pink",
      xlab = "Number of Seasons")
 ```
 
+It appears that the vast majority of shows on Netflix run for 1 season. 
+
+
+
+
+
+
 
 

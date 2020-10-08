@@ -126,3 +126,6 @@ git commit -a -m "coloring images purple"
 git push
 git commit -a -m "updating image 4"
 git push
+git add Project\ Report.Rmd 
+git commit -a -m "Created RMD file, updated image 4"
+git push
