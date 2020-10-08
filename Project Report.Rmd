@@ -5,20 +5,24 @@ output: pdf_document
 
 We analyze the Netflix dataset.
 
-```{r}
+```{r, warning=F, message=F}
+netflix <- read.csv("derived_data/netflix.csv")
+movies <- read.csv("derived_data/movies.csv")
+tv <- read.csv("derived_data/tv.csv")
+
 head(netflix)
 ```
 
 This can be done best by breaking it up into the TV and movies datasets separately.
 
-```{r}
+```{r, warning=F, message=F}
 head(tv)
 colnames(tv)
 ```
 
 With the data on TV shows, we're interested in possibly predicting the number of seasons from the other variables. Some of these variables are highly unlikely to overfit. For example, title, director, cast, and description all possibly uniquely identify the TV show. The useful predictor variables here appear to be country, release year, and listed in and/or rating. Let's fit a simple linear regression model and see how well it predicts the number of seasons from those 4 variables:
 
-```{r}
+```{r, warning=F, message=F}
 # m <- lm(num_seasons ~ country + release_year + rating + listed_in, 
 #         data = tv)
 # summary(m)
@@ -27,14 +31,14 @@ length(unique(tv$country)) * length(unique(tv$rating)) * length(unique(tv$listed
 
 This "simple" model just estimated 394,320 parameters because we didn't think about how many different countries and categories of TV there are. Let's try a much simpler model that takes only rating into account:
 
-```{r}
+```{r, warning=F, message=F}
 m <- lm(num_seasons ~ release_year + rating, data = tv)
 summary(m)
 ```
 
 Interestingly, this model seems to suggest that rating is NOT a significant predictor for number of seasons. So, we will exclude it from the model, and instead examine by country.
 
-```{r}
+```{r, warning=F, message=F}
 m2 <- lm(num_seasons ~ release_year, data = tv)
 summary(m2)
 b <- coef(m2)[1]
@@ -48,19 +52,19 @@ lines(c(1920, 2040), c(m*1920 + b, m*2040 + b))
 plot(tv$release_year, m2$residuals,
      main = "Residual Plot for Model 2",
      xlab = "Release Year", ylab = "Residuals")
-lines(c(1920, 2040), c(coef, 0))
+lines(c(1920, 2040), c(0, 0))
 ```
 
 This (clearly) does not satisfy the assumptions of linear regression that have to do with the error terms being normally distributed with mean zero and constant variance. Let's see if we can get a better fit by using a LOESS or spline model.
 
-```{r}
+```{r, warning=F, message=F}
 m3 <- loess(num_seasons ~ release_year, data = tv)
 summary(m3)
 ```
 
 The model seems to be completely dominated by a majority of TV shows with few seasons. How many shows run for only 1 season?
 
-```{r}
+```{r, warning=F, message=F}
 hist(tv$num_seasons, col = "pink",
      main = "Histogram of Number of Seasons",
      xlab = "Number of Seasons")
@@ -69,9 +73,6 @@ hist(tv$num_seasons, col = "pink",
 It appears that the vast majority of shows on Netflix run for 1 season. 
 
 
+# Future Directions
 
-
-
-
-
-
+This analysis is not super interesting. In the future, I would maybe try to learn some simple text analysis and/or try to merge this data with movie/tv ratings to see whether I can predict them.
