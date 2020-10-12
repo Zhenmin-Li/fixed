@@ -1,0 +1,91 @@
+---
+title: "Homework 4"
+author: "Sam Hawke"
+date: "10/12/2020"
+output: html_document
+---
+
+# Question 1
+
+```{r}
+data = read.csv("500_Person_Gender_Height_Weight_Index.csv")
+library("gbm")
+library("tidyverse")
+
+data$gender = ifelse(data$Gender == "Male", 1, 0)
+model1 <- glm(gender ~ Height + Weight, data = data)
+accuracy = sum(round(model1$fitted.values) == data$gender) / nrow(data)
+accuracy
+```
+
+This model has training accuracy of 0.52, or 52%.
+
+# Question 2
+
+```{r}
+set.seed(611)
+model2 <- gbm(gender ~ Height + Weight, data = data,
+              distribution = "bernoulli")
+
+sum(round(predict.gbm(model2, newdata = data[, c(2, 3)])) == data$gender) / nrow(data) 
+```
+
+This model has training accuracy of 0.516, or 51.6%.
+
+# Question 3
+
+```{r}
+library("ModelMetrics")
+set.seed(611)
+data_50_males <- data %>% 
+  filter(gender == 1)
+data_50_males <- data_50_males[1:50,]
+
+model3 <- gbm(gender ~ Height + Weight, data = data_50_males,
+              distribution = "bernoulli")
+
+f1Score(actual = data_50_males$gender, 
+        predicted = predict.gbm(model3, newdata = data_50_males[, c(2, 3)]),
+        cutoff = 0.5)
+```
+
+This model has an F1 score of 1.
+
+# Question 4
+
+```{r}
+pred <- predict.gbm(model3, newdata = data[, c(2, 3)])
+roc <- do.call(rbind, Map(function(threshold){
+    p <- pred > threshold;
+    tp <- sum(p[data$gender])/sum(data$gender);
+    fp <- sum(p[!data$gender])/sum(!data$gender);
+    tibble(threshold=threshold,
+           tp=tp,
+           fp=fp)
+},seq(100)/100))
+
+ggplot(roc, aes(fp,tp)) + geom_point(fill = "red") + xlim(0,1) + ylim(0,1) +
+  labs(title="ROC Curve",x="False Positive Rate",y="True Positive Rate") 
+```
+
+This classifier is perfect regardless of the choice of threshold. (Classic overfitting.)
+
+# Question 5
+
+```{r}
+model4 <- kmeans(data[, c(2, 3)], centers = 2)
+data$cluster = model4$cluster
+ggplot(data = data) +
+  geom_point(aes(x = Height, y = Weight, 
+                 color = ifelse(cluster == 1, "female", "male"))) +
+  labs(title = "Height versus Weight",
+       color = "Cluster")
+
+ggplot(data = data) +
+  geom_point(aes(x = Height, y = Weight, 
+                 color = ifelse(gender == 0, "female", "male"))) +
+  labs(title = "Height versus Weight",
+       color = "Gender")
+```
+
+There is no cluster to be seen with the known labels.
