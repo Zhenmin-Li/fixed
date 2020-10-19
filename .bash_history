@@ -129,3 +129,16 @@ git push
 git add Project\ Report.Rmd 
 git commit -a -m "Created RMD file, updated image 4"
 git push
+git add -a -m "adding model1"
+git add model1.R 
+git commit -a -m "added model 1"
+git add model2.R 
+git commit -a -m "added model 2"
+git add model3.R 
+git commit -a -m "added model 3"
+git add Project-Report.knit.md 
+git commit -a -m "added knitted project report"
+git push
+git add HW4.Rmd 
+git commit -m "added HW4"
+git push
