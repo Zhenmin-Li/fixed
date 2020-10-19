@@ -12,7 +12,7 @@ p3 <- ggplot(data = s, aes(x = release_year, y = num_seasons)) +
   labs(title = "Scatterplot of Number of Seasons by Release Year",
        y = "Number of Seasons",
        x = "Release Year") +
-  geom_smooth(method = "loess")
+  geom_smooth(method = "loess", se = F)
 
 ggsave("derived_data/model3_image3.png", p3)
 

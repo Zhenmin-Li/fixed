@@ -29,13 +29,13 @@ derived_data/model2_plot2.png: derived_data/netflix.csv derived_data/tv.csv deri
 derived_data/loess_model3.rds: derived_data/netflix.csv derived_data/tv.csv derived_data/movies.csv model3.R
 	Rscript model3.R
 	
+derived_data/model3_image3.png: derived_data/netflix.csv derived_data/tv.csv derived_data/movies.csv model3.R
+	Rscript model3.R
+	
 derived_data/model3_image1.png: derived_data/netflix.csv derived_data/tv.csv derived_data/movies.csv model3.R
 	Rscript model3.R
 	
 derived_data/model3_image2.png: derived_data/netflix.csv derived_data/tv.csv derived_data/movies.csv model3.R
-	Rscript model3.R
-	
-derived_data/model3_image3.png: derived_data/netflix.csv derived_data/tv.csv derived_data/movies.csv model3.R
 	Rscript model3.R
   
 derived_data/netflix.csv:\
