@@ -1,5 +1,6 @@
 ---
 title: "Project Report: An Analysis of the Netflix Dataset"
+author: "Sam Hawke"
 output: pdf_document
 ---
 
