@@ -1,9 +1,18 @@
 ---
-title: "Project Report"
+title: "Project Report: An Analysis of the Netflix Dataset"
+author: "Sam Hawke"
 output: pdf_document
 ---
 
-We analyze the Netflix dataset.
+As the COVID-19 pandemic continues, Netflix increasingly becomes a part of modern life. 
+
+So what kind of content is Netflix producing? Do they have a bias in terms of which genres they make more available?
+
+Additionally, certain shows on Netflix are more "successful" than other shows. In particular, the shows that get more seasons were renewed because Netflix executives thought they were worth it. Are there certain types of shows that get renewed more than others? Do the shows with many seasons have something in common?
+
+This project will do descriptive statistics of the TV shows publicly available from the Netflix dataset found on Kaggle at this link: https://www.kaggle.com/shivamb/netflix-shows
+
+We will also look at certain models to try to predict the nu mber of seasons for which a TV show runs based on other variables.
 
 ```{r, warning=F, message=F, echo=F}
 netflix <- read.csv("derived_data/netflix.csv")
@@ -13,11 +22,9 @@ tv <- read.csv("derived_data/tv.csv")
 #head(netflix)
 ```
 
-This can be done best by breaking it up into the TV and movies datasets separately.
+With the data on TV shows, we're interested in possibly predicting the number of seasons from the other variables. Some of these variables are highly unlikely to overfit. For example, title, director, cast, and description all likely uniquely identify the TV show. The useful predictor variables here appear to be country, release year, and listed in and/or rating. It might seem reasonable at first to fit a simple linear regression model from those 4 variables and see how well it predicts the number of seasons.
 
-With the data on TV shows, we're interested in possibly predicting the number of seasons from the other variables. Some of these variables are highly unlikely to overfit. For example, title, director, cast, and description all possibly uniquely identify the TV show. The useful predictor variables here appear to be country, release year, and listed in and/or rating. Let's fit a simple linear regression model and see how well it predicts the number of seasons from those 4 variables:
-
-```{r, warning=F, message=F, echo=F}
+```{r, warning=F, message=F}
 # summary(readRDS("derived_data/naive_linear_model.rds"));
 # m <- lm(num_seasons ~ country + release_year + rating + listed_in, 
 #         data = tv)
@@ -25,13 +32,13 @@ With the data on TV shows, we're interested in possibly predicting the number of
 length(unique(tv$country)) * length(unique(tv$rating)) * length(unique(tv$listed_in))
 ```
 
-This "simple" model just estimated 394,320 parameters because we didn't think about how many different countries and categories of TV there are. Let's try a much simpler model that takes only rating and release year into account:
+Unfortunately, this "simple" model estimates 39,4320 parameters: one for each possible combination of country, rating, and category of TV show. So, let's try a much simpler model that takes only rating and release year into account:
 
 ```{r, warning=F, message=F, echo=F}
 summary(readRDS("derived_data/linear_model1.rds"))
 ```
 
-Interestingly, this model seems to suggest that rating is NOT a significant predictor for number of seasons. So, we will exclude it from the model, and instead examine by only release year.
+Interestingly, this model seems to suggest that rating is NOT a significant predictor for number of seasons. (It is important to note that, in this context, rating is taken to mean the specification of the appropriate audience, i.e. TV-14, TV-MA, etc.) Therefore, we will exclude it from the model, and instead examine by only release year.
 
 ```{r, warning=F, message=F, echo=F}
 summary(readRDS("derived_data/linear_model2.rds"))
@@ -40,19 +47,21 @@ summary(readRDS("derived_data/linear_model2.rds"))
 ![]("derived_data/model2_plot1.png")
 ![]("derived_data/model2_plot2.png")
 
-This (clearly) does not satisfy the assumptions of linear regression that have to do with the error terms being normally distributed with mean zero and constant variance. Let's see if we can get a better fit by using a LOESS model.
+These data (clearly) do not satisfy the assumptions of linear regression that have to do with the error terms being normally distributed with mean zero and constant variance. Let's see if we can get a better fit by using a LOESS model.
 
 ```{r, warning=F, message=F, echo=F}
 summary(readRDS("derived_data/loess_model3.rds"))
+
 ```
+![]("derived_data/model3_image3.png")
+
+While this fit seems arguably more reasonable, the general trend appears to be completely dominated by a majority of TV shows with only 1 season. How many shows run for only 1 season?
 
 ![]("derived_data/model3_image1.png")
 ![]("derived_data/model3_image2.png")
 
-The model seems to be completely dominated by a majority of TV shows with few seasons. How many shows run for only 1 season?
-
 It appears that the vast majority of shows on Netflix run for 1 season. 
 
-# Future Directions
+# Further Explorations
 
-This analysis is not super interesting. In the future, I would maybe try to learn some simple text analysis and/or try to merge this data with movie/tv ratings to see whether I can predict them.
+While the conclusion found from these data was not super interesting, there are certain directions to explore which could be interesting. Firstly, we could turn it into a classification problem, where we try to predict a binary outcome: specifically whether or not a show runs for 1 season or more. Secondly, we could throw away the shows that ran for only 1 season and try to find a model to predict the number of seasons for which a show runs conditioned on the assumption that it runs for more than one season. Thirdly, rather than simply using these given variables, we could try to find whether certain directors and/or actors account for more of the shows that run for longer, or whether those shows are more evenly distributed among different people. Finally, we could try to use some basic text mining to examine whether certain words appear in descriptions more than in  others, and if certain words appear more often in longer-running shows than in others.

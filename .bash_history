@@ -142,3 +142,26 @@ git push
 git add HW4.Rmd 
 git commit -m "added HW4"
 git push
+make Project\ Report.pdf
+git add Report.Rmd 
+git commit -a -m "changed filename to remove spaces"
+git push
+make Report.pdf
+ak
+make Report.pdf
+qeueuu
+make Report.pdf 
+git add derived_data/naive_linear_model.rds 
+make Report.pdf 
+git add derived_data/model2_plot1.png 
+git add derived_data/model2_plot2.png 
+git add derived_data/linear_model1.rds 
+git add derived_data/linear_model2.rds 
+git add derived_data/naive_linear_model.rds 
+git add derived_data/model3_image.png 
+git add derived_data/loess_model3.rds 
+git commit -a -m "added new models and plots"
+git push
+make Report.pdf 
+git commit -a -m "MVP for project"
+git push
