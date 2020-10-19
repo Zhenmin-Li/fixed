@@ -52,5 +52,10 @@ This Docker container is based on rocker/verse. To run rstudio server:
     > docker run -v "`pwd`:/home/rstudio" -p 8787:8787\
     -e PASSWORD=mypass -t project1-env
 
-Then, connect to the machine on port 8787.
+Then, connect to the machine on port 8787 by typing into your web browser: localhost:8787
 
+Note: mypass should be replaced with whatever you want your password to be (for security purposes).
+
+To build the final Report.pdf file:
+
+    > make Report.pdf
