@@ -1,4 +1,8 @@
-.PHONY: clean
+.PHONY: tv_app
+
+tv_app: 
+ derived_data/tv.csv
+	Rscript app.R ${PORT}
 
 clean:
 	rm derived_data/*
