@@ -7,12 +7,17 @@ tv_app:
 clean:
 	rm derived_data/*
 	
+Artifacts/python_fig.png:\
+ derived_data/tv.csv
+	python3 611-project.py
+	
 Report.pdf: Report.Rmd\
  derived_data/netflix.csv\
  derived_data/tv.csv\
  derived_data/movies.csv\
  derived_data/naive_linear_model.rds\
- derived_data/linear_model1.rds
+ derived_data/linear_model1.rds\
+ Artifacts/python_fig.png
 	R -e "rmarkdown::render('Report.Rmd', output_format='pdf_document')"
 	
 derived_data/naive_linear_model.rds: derived_data/netflix.csv derived_data/tv.csv derived_data/movies.csv build_model0.R

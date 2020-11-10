@@ -76,3 +76,7 @@ It appears that the vast majority of shows on Netflix run for 1 season.
 # Future Directions
 
 This analysis is not super interesting. In the future, I would maybe try to learn some simple text analysis and/or try to merge this data with movie/tv ratings to see whether I can predict them.
+
+# Python
+
+![](Artifacts/python_fig.png)
