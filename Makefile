@@ -1,7 +1,6 @@
 .PHONY: tv_app
 
-tv_app: 
- derived_data/tv.csv
+tv_app: derived_data/tv.csv
 	Rscript app.R ${PORT}
 
 clean:
@@ -15,7 +14,6 @@ Report.pdf: Report.Rmd\
  derived_data/netflix.csv\
  derived_data/tv.csv\
  derived_data/movies.csv\
- derived_data/naive_linear_model.rds\
  derived_data/linear_model1.rds\
  Artifacts/python_fig.png
 	R -e "rmarkdown::render('Report.Rmd', output_format='pdf_document')"
@@ -47,17 +45,14 @@ derived_data/model3_image1.png: derived_data/netflix.csv derived_data/tv.csv der
 derived_data/model3_image2.png: derived_data/netflix.csv derived_data/tv.csv derived_data/movies.csv model3.R
 	Rscript model3.R
   
-derived_data/netflix.csv:\
- source_data/netflix_titles.csv\
+derived_data/netflix.csv:source_data/netflix_titles.csv\
  tidy_data.R
 	Rscript tidy_data.R
 	
-derived_data/movies.csv:\
- source_data/netflix_titles.csv\
+derived_data/movies.csv:source_data/netflix_titles.csv\
  tidy_data.R
 	Rscript tidy_data.R
 	
-derived_data/tv.csv:\
- source_data/netflix_titles.csv\
+derived_data/tv.csv:source_data/netflix_titles.csv\
  tidy_data.R
 	Rscript tidy_data.R

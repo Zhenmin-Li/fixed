@@ -1,3 +1,7 @@
+library(dplyr)
+library(ggplot2)
+
+
 netflix <- read.csv("derived_data/netflix.csv")
 movies <- read.csv("derived_data/movies.csv")
 tv <- read.csv("derived_data/tv.csv")
